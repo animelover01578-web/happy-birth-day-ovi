@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <!-- লাভ অ্যানিমেশনের জন্য Google Fonts থেকে একটি সুন্দর ফন্ট নেওয়া হয়েছে -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(135deg, #ffe4e1 0%, #ffb6c1 100%);
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 85%;
+            max-width: 400px;
+            position: relative;
+            z-index: 10;
+        }
+        h1 {
+            color: #ff4757;
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #333;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 25px;
+        }
+        .btn {
+            background-color: #ff4757;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.3);
+        }
+        .btn-back {
+            background-color: #747d8c;
+            box-shadow: 0 5px 15px rgba(116, 125, 140, 0.3);
+        }
+        /* পেজ পরিবর্তনের জন্য ক্লাসের নিয়ম */
+        .page {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        /* বিশেষ ফন্টের স্টাইল */
+        .love-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 32px;
+            color: #d63031;
+            margin-bottom: 20px;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        /* ছবির স্টাইল */
+        .birthday-img {
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        /* হার্ট অ্যানিমেশন ইফেক্ট */
+        .heart {
+            position: absolute;
+            color: #ff4757;
+            font-size: 24px;
+            animation: floatUp 3s linear forwards;
+            opacity: 0;
+            z-index: 1;
+        }
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- প্রথম পেজ -->
+    <div id="page1" class="container page active">
+        <h1>🎉 Happy Birthday Ovi 🎂</h1>
+        <div class="btn-group">
+            <button class="btn btn-back" onclick="goBack()">Back</button>
+            <button class="btn" onclick="nextPage(2)">Continue</button>
+        </div>
+    </div>
+
+    <!-- দ্বিতীয় পেজ -->
+    <div id="page2" class="container page">
+        <p>Many Many happy returns of the day <br><strong>Ayat er Ammu</strong> ❤️</p>
+        <div class="btn-group">
+            <button class="btn" onclick="triggerLoveAnimation()">Thanks</button>
+        </div>
+    </div>
+
+    <!-- তৃতীয় পেজ (লাভ অ্যানিমেশন ও টেক্সট) -->
+    <div id="page3" class="container page">
+        <div class="love-text">I love you sooo much my sweetheart ✨❤️‍🩹</div>
+        <div class="btn-group">
+            <button class="btn" onclick="nextPage(4)">OK</button>
+        </div>
+    </div>
+
+    <!-- চতুর্থ পেজ (ছবি দেখানোর জায়গা) -->
+    <div id="page4" class="container page">
+        <!-- নিচে 'your-image-link.jpg' কেটে আপনার ছবির লিংক বসাবেন -->
+        <img src="https://i.ibb.co/rfwbRyz/1000106157.jpg" alt="Birthday Image" class="birthday-img">
+        <h1>Happy Birthday! 🥳✨</h1>
+    </div>
+
+    <script>
+        // এক পেজ থেকে অন্য পেজে যাওয়ার ফাংশন
+        function nextPage(pageNumber) {
+            // সব পেজ লুকিয়ে ফেলা
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            // নির্দিষ্ট পেজটি দেখানো
+            document.getElementById('page' + pageNumber).classList.add('active');
+        }
+
+        // Back বাটনে ক্লিক করলে যা হবে
+        function goBack() {
+            alert("আপনি পেছনে ফিরে যাচ্ছেন!");
+            window.history.back(); // ব্রাউজারের আগের পেজে নিয়ে যাবে
+        }
+
+        // Thanks বাটনে চাপ দিলে লাভ অ্যানিমেশন হবে এবং ৩ নম্বর পেজে যাবে
+        function triggerLoveAnimation() {
+            // স্ক্রিনে অনেকগুলো লাভ তৈরি করা
+            for (let i = 0; i < 30; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+            
+            // ২ সেকেন্ড পর ৩ নম্বর পেজে নিয়ে যাওয়া
+            setTimeout(() => {
+                nextPage(3);
+            }, 2000);
+        }
+
+        // লাভ বা হার্ট তৈরি করার লজিক
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 2 + 's'; // ২ থেকে ৪ সেকেন্ডের অ্যানিমেশন
+            document.body.appendChild(heart);
+
+            // অ্যানিমেশন শেষ হলে উপাদানটি মুছে ফেলা
+            setTimeout(() => {
+                heart.remove();
+            }, 4000);
+        }
+    </script>
+</body>
+  </html>
